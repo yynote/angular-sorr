@@ -1,0 +1,38 @@
+<div class="container-fluid none-padding">
+  <div class="row">
+    <div class="col">
+      <div class="dnm-tabset">
+        <ngb-tabset #tabs>
+          <ngb-tab id="tab-0">
+            <ng-template ngbTabTitle>
+              <i class="tab-icon dnm-icon-meter-readings"></i>
+              <span class="tab-name text-uppercase">Consumption Report</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <consumption-report></consumption-report>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="tab-1">
+            <ng-template ngbTabTitle>
+              <i class="tab-icon dnm-icon-meter-readings"></i>
+              <span class="tab-name text-uppercase">Detail Consumption Report</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <detail-consumption-report></detail-consumption-report>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="tab-2">
+            <ng-template ngbTabTitle>
+              <i class="tab-icon dnm-icon-meter-readings"></i>
+              <span class="tab-name text-uppercase">Tenant Slip</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <tenant-slip></tenant-slip>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+        
+      </div>
+    </div>
+  </div>
+</div>

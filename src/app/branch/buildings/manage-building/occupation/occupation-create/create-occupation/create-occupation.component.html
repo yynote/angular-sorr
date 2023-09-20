@@ -1,0 +1,171 @@
+<div class="container-fluid none-padding create-occup">
+  <div class="dnm-tabstep">
+    <div class="tab-line"></div>
+    <div [ngClass]="'checked-tab-' + getCurrentIdx().toString()" class="tab-pr-line"></div>
+    <ngb-tabset #tabs (tabChange)="beforeChange($event)" [destroyOnHide]="true">
+      <ngb-tab id="{{TabType.BuildingPeriod}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.MngShopsDetails" class="tab-lbl text-uppercase">1</span>
+          <span *ngIf="getCurrentIdx() >= TabType.MngShopsDetails" class="chckd-tab-lbl chckd-tab-lbl-1"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Building period</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-building-period #wizardComponent (next)="onNext($event)" (previous)="onPrevious($event)"
+                                  (save)="onSaveDraft()" (updateBuildingPeriod)="onUpdateBuildingPeriod($event)"
+                                  [buildingPeriod]="buildingPeriod$ | async"></manage-building-period>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.MngShopsDetails}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.MngComonArea" class="tab-lbl text-uppercase">2</span>
+          <span *ngIf="getCurrentIdx() >= TabType.MngComonArea" class="chckd-tab-lbl chckd-tab-lbl-2"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Manage Shops Details</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-shops-det #wizardComponent (addShop)="onAddShop()"
+                            (deleteShop)="onDeleteShop($event)" (mergeShops)="onMergeShops($event)"
+                            (next)="onNext($event)"
+                            (previous)="onPrevious($event)" (save)="onSaveDraft()"
+                            (setSpareStatusForShops)="onSetSpareStatusForShops($event)"
+                            (setUnspareStatusForShops)="onSetUnspareStatusForShops($event)"
+                            (setVacantStatusForShops)="onSetVacantStatusForShops($event)"
+                            (splitShop)="onSplitShop($event)"
+                            (updateShop)="onUpdateShop($event)" (updateShopOrderIndex)="onUpdateShopOrderIndex($event)"
+                            (updateShopSearchTerm)="onUpdateShopSearchTerm($event)"
+                            (updateShopStatusFilter)="onUpdateShopStatusFilter($event)"
+                            [buildingId]="buildingId$ | async"
+                            [orderIndex]="shopOrderIndex$ | async"
+                            [shopCount]="shopCount$ | async"
+                            [shops]="shopsWithFilteringAndSerchByNameAndTenant$ | async"></manage-shops-det>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.MngComonArea}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.ConCommonAreaShops" class="tab-lbl text-uppercase">3</span>
+          <span *ngIf="getCurrentIdx() >= TabType.ConCommonAreaShops" class="chckd-tab-lbl chckd-tab-lbl-3"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Create and Manage Common Areas</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-common-area #wizardComponent (addCommonAreas)="onAddCommonAreas($event)" (defaultCommonAreas)="onGetDefaultCommonAreas($event)"
+                              (deleteCommonArea)="onDeleteCommonArea($event)"
+                              (next)="onNext($event)"
+                              (previous)="onPrevious($event)"
+                              (save)="onSaveDraft()"
+                              (updateCommonArea)="onUpdateCommonArea($event)"
+                              (updateCommonAreaOrderIndex)="onUpdateCommonAreaOrderIndex($event)"
+                              (updateCommonAreaSearchTerm)="onUpdateCommonAreaSearchTerm($event)"
+                              (updateCommonAreaServices)="onUpdateCommonAreaServices($event)"
+                              [commonAreaCount]="commonAreaCount$ | async"
+                              [commonAreas]="commonAreaWithSearching$ | async"
+                              [orderIndex]="commonAreaOrderIndex$ | async"></manage-common-area>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.ConCommonAreaShops}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.MngLiable" class="tab-lbl text-uppercase">4</span>
+          <span *ngIf="getCurrentIdx() >= TabType.MngLiable" class="chckd-tab-lbl chckd-tab-lbl-4"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Connection between Common areas and Shops</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-common-area-shop #wizardComponent (addCommonAreaShop)="onAddCommonAreaShop($event)"
+                                   (checkAllCommonAreaShops)="onCheckAllCommonAreaShops($event)"
+                                   (checkAllShopCommonAreas)="onCheckAllShopCommonAreas($event)"
+                                   (deleteCommonAreaShop)="onDeleteCommonAreaShop($event)"
+                                   (next)="onNext($event)" (previous)="onPrevious($event)"
+                                   (save)="onSaveDraft()"
+                                   (uncheckAllCommonAreaShops)="onUncheckAllCommonAreaShops($event)"
+                                   (uncheckAllShopCommonAreas)="onUncheckAllShopCommonAreas($event)"
+                                   (updateCommonAreaSearchTerm)="onUpdateCommonAreaSearchTerm($event)"
+                                   (updateShopConnectFilter)="onUpdateShopConnectFilter($event)"
+                                   (updateShopSearchTerm)="onUpdateShopSearchTerm($event)"
+                                   [commonAreasShopsData]="commonAreasShopsData$ | async"
+                                   [commonAreas]="commonAreaWithSearching$ | async"
+                                   [shops]="shopWithFilteringAndSearching$ | async"></manage-common-area-shop>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.MngLiable}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.MngLocations" class="tab-lbl text-uppercase">5</span>
+          <span *ngIf="getCurrentIdx() >= TabType.MngLocations" class="chckd-tab-lbl chckd-tab-lbl-5"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Manage Liability</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-liability #wizardComponent (commonAreaLiabilityChange)="onCommonAreaLiabilityChange($event)"
+                            (commonAreaLiabilityServiceTypeChange)="onCommonAreaLiabilityServiceTypeChange($event)"
+                            (defaultSettingsChanged)="onDefaultSettingsChanged($event)"
+                            (includeNotLiableShopsChanged)="onIncludeNotLiableShopsChanged($event)"
+                            (includeVacantShopSqMChanged)="onIncludeVacantShopSqMChanged($event)"
+                            (next)="onNext($event)"
+                            (ownerLiabilityChanged)="onOwnerLiabilityChanged($event)"
+                            (previous)="onPrevious($event)"
+                            (save)="onSaveDraft()"
+                            (updateShopAllocation)="onUpdateShopAllocation($event)"
+                            (updateShopFilter)="onUpdateShopFilter($event)"
+                            (updateShopLiability)="onUpdateShopLiability($event)"
+                            (updateShopTermSearch)="onUpdateShopTermSearch($event)"
+                            (updateSplit)="onUpdateSplit($event)"
+                            [commonAreaLiablities]="commonAreaLiablities$ | async"
+                            [liabilityShopFilterBy]="liabilityShopFilterBy$ | async"
+                            [liabilityShopSearchTerm]="liabilityShopSearchTerm$ | async"
+                            [selectedCommonAreaLiablityServiceType]="selectedCommonAreaLiablityServiceType$ | async"
+                            [selectedCommonAreaLiablityService]="selectedCommonAreaLiablityService$ | async"
+                            [selectedCommonAreaLiablity]="selectedCommonAreaLiablity$ | async"></manage-liability>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.MngLocations}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.AllocateEquipmentTemplates" class="tab-lbl text-uppercase">6</span>
+          <span *ngIf="getCurrentIdx() >= TabType.AllocateEquipmentTemplates" class="chckd-tab-lbl chckd-tab-lbl-6"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Manage Locations</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-locations #wizardComponent (addLocation)="onCreateLocation($event)" (deleteLocation)="onDeleteLocation($event)"
+                            (next)="onNext($event)" (previous)="onPrevious($event)"
+                            (save)="onSaveDraft()" (updateLocation)="onUpdateLocation($event)"
+                            (updateLocationSequenceNumber)="onUpdateLocationSequenceNumber($event)"
+                            (updateLocationsOrderIndex)="onUpdateLocationOrderIndex($event)"
+                            [locations]="locations$ | async"
+                            [orderIndex]="locationOrderIndex$ | async"></manage-locations>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.AllocateEquipmentTemplates}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.AllocateTariffs" class="tab-lbl text-uppercase">7</span>
+          <span *ngIf="getCurrentIdx() >= TabType.AllocateTariffs" class="chckd-tab-lbl chckd-tab-lbl-7"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Allocate Equipment Templates</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-equip-templates #wizardComponent (addEquipmentTemplate)="onAddEquipmentTemplate($event)"
+                                  (next)="onNext($event)"
+                                  (previous)="onPrevious($event)"
+                                  (removeEquipmentTemplate)="onRemoveEquipmentTemplate($event)"
+                                  (save)="onSaveDraft()" (search)="onEquipmentTemplatesSearch($event)"
+                                  (updateOrderIndex)="onChangeEquipmentTemplatesOrderIndex($event)"
+                                  [assignedEquipmentTemplatesCount]="assignedEquipmentTemplatesCount$ | async"
+                                  [equipmentTemplates]="equipmentTemplates$ | async"
+                                  [searchKey]="equipmentTemplatesSearchKey$ | async"></manage-equip-templates>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="{{TabType.AllocateTariffs}}">
+        <ng-template ngbTabTitle>
+          <span *ngIf="getCurrentIdx() < TabType.CheckedWizard" class="tab-lbl text-uppercase">8</span>
+          <span *ngIf="getCurrentIdx() >= TabType.CheckedWizard" class="chckd-tab-lbl chckd-tab-lbl-8"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Allocate Tariffs</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-allocate-tariffs #wizardComponent (finalSave)="onFinalSave()" (previous)="onPrevious($event)"
+                                   (save)="onSaveDraft()" [branchId]="branchId"
+                                   [buildingId]="buildingId$ | async"></manage-allocate-tariffs>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

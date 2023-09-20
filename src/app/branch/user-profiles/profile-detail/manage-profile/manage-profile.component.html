@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h5 class="modal-title">Manage User Profile Details</h5>
+  <button (click)="close()" aria-label="Close" class="close" data-dismiss="modal" type="button">
+    <i aria-hidden="true" class="icon-relative close-popup-icon"></i>
+  </button>
+</div>
+<div class="modal-body mng-profile-popup">
+  <div class="dnm-tabset">
+    <ngb-tabset #tabs>
+      <ngb-tab id="tab-0">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon contacts-icon"></i>
+          <span class="tab-name text-uppercase">Clients</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-profile-clients [allClients]="allClients" [id]="id" [isNew]="isNew" [model]="model"
+                                  [showAll]="showAllClients"></manage-profile-clients>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-1">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon dnm-icon-users"></i>
+          <span class="tab-name text-uppercase">Users</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <manage-profile-users [allRoles]="allRoles" [allUsers]="allUsers" [id]="id" [isNew]="isNew"
+                                [model]="model"></manage-profile-users>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

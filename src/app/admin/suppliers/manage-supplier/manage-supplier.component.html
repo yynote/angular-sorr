@@ -1,0 +1,41 @@
+<div class="page-content splr-trfs-wrp">
+  <div class="container-fluid none-padding">
+    <div class="row header-row">
+      <div class="col">
+        <div class="d-flex align-items-center justify-content-between">
+          <h1 class="page-title">Manage Supplier details</h1>
+          <back-button [redirectPath]="redirectPath"></back-button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dnm-tabset">
+    <ngb-tabset #tabs (tabChange)="onBeforeTabChange($event)" [activeId]="tabId">
+      <ngb-tab id="tab-0">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon dnm-icon-splrs-dtls"></i>
+          <span class="tab-name text-uppercase">Supplier details</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-1">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon dnm-icon-splrs-ctgrs"></i>
+          <span class="tab-name text-uppercase">Tariff Settings</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-2">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon dnm-icon-splrs-trfs"></i>
+          <span class="tab-name text-uppercase client-tab-name">Tariffs</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <router-outlet></router-outlet>
+</div>

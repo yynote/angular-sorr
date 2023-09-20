@@ -1,0 +1,55 @@
+<div class="modal-header">
+  <h5 *ngIf="isNew" class="modal-title">Create Branch</h5>
+  <h5 *ngIf="!isNew" class="modal-title">Edit Admins</h5>
+  <button (click)="dismiss()" aria-label="Close" class="close" data-dismiss="modal" type="button">
+    <i aria-hidden="true" class="icon-relative close-popup-icon"></i>
+  </button>
+</div>
+<div class="modal-body create-branch-popup">
+  <div class="dnm-tabset">
+    <ngb-tabset #tabs (tabChange)="onTabChange($event)" *ngIf="isNew">
+      <ngb-tab id="tab-0">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon general-info-icon"></i>
+          <span class="tab-name text-uppercase">General Info</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <branch-general-info (onDismiss)="dismiss()" (onNext)="next($event)" [isNew]="isNew"
+                               [model]="model" [tabChanged]="generalInfoTabChanged"></branch-general-info>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-1">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon super-admin-icon"></i>
+          <span class="tab-name text-uppercase">Branch Admin</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <branch-admin (onDismiss)="dismiss()" (onNext)="next($event)" [isNew]="isNew" [model]="model"></branch-admin>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-2">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon shareholders-icon"></i>
+          <span class="tab-name text-uppercase">Shareholders</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <branch-shareholders (onDismiss)="dismiss()" (onNext)="next($event)" [isNew]="isNew"
+                               [model]="model"></branch-shareholders>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="tab-3">
+        <ng-template ngbTabTitle>
+          <i class="tab-icon bank-account-icon"></i>
+          <span class="tab-name text-uppercase">Bank Accounts</span>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <branch-bank-accounts (onDismiss)="dismiss()" (onNext)="next($event)" (onSave)="submit()"
+                                [detailedAccount]="detailedBankAccount" [model]="model"></branch-bank-accounts>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+  <div *ngIf="!isNew" class="edit-container">
+    <branch-admin (onDismiss)="dismiss()" (onNext)="next($event)" [isNew]="isNew" [model]="model"></branch-admin>
+  </div>
+</div>

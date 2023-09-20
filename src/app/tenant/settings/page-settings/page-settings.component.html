@@ -1,0 +1,38 @@
+<div class="container-fluid top-container">
+  <div class="row content">
+    <div class="client-header-title">
+      <h1 class="page-title text-uppercase">User Account</h1>
+    </div>
+    <back-button></back-button>
+  </div>
+</div>
+
+<div class="dnm-tabset">
+  <ngb-tabset #tabs>
+    <ngb-tab id="tab-0">
+      <ng-template ngbTabTitle>
+        <i class="tab-icon general-info-icon"></i>
+        <span class="tab-name text-uppercase client-tab-name">General Info</span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <user-general-info (cancel)="onCancelGeneralInfo()"
+                           (changeLogo)="onChangeLogo($event)"
+                           (save)="onSaveGeneralInfo()"
+                           [form]="generalInfoForm$ | async">
+        </user-general-info>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab id="tab-1">
+      <ng-template ngbTabTitle>
+        <i class="tab-icon dnm-icon-password"></i>
+        <span class="tab-name text-uppercase client-tab-name">Password</span>
+      </ng-template>
+      <ng-template ngbTabContent>
+        <user-password (cancel)="onCancelChangePassword()"
+                       (save)="onSavePassword()"
+                       [form]="changePasswordForm$ | async">
+        </user-password>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+</div>

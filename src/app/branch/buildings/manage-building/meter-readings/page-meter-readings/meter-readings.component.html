@@ -1,0 +1,28 @@
+<div class="container-fluid none-padding">
+  <div class="row">
+    <div class="col">
+      <div class="dnm-tabset">
+        <ngb-tabset #tabs>
+          <ngb-tab id="tab-0">
+            <ng-template ngbTabTitle>
+              <i class="tab-icon dnm-icon-meter-readings"></i>
+              <span class="tab-name text-uppercase">Billing Readings</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <billing-readings></billing-readings>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab id="tab-2">
+            <ng-template ngbTabTitle>
+              <i class="tab-icon dnm-icon-building-periods"></i>
+              <span class="tab-name text-uppercase">Building Period</span>
+            </ng-template>
+            <ng-template ngbTabContent>
+              <building-periods></building-periods>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

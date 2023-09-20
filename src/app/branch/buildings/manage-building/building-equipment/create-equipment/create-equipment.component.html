@@ -1,0 +1,75 @@
+<div class="container-fluid none-padding create-equip">
+  <div class="dnm-tabstep">
+    <div class="tab-line"></div>
+    <div class="tab-pr-line checked-tab-{{ step$ | async}}"></div>
+    <ngb-tabset #tabs (tabChange)="beforeChange($event)" [activeId]="step$ | async">
+      <ngb-tab id="0">
+        <ng-template ngbTabTitle>
+          <span *ngIf="(step$ | async) < 1" class="tab-lbl text-uppercase">1</span>
+          <span *ngIf="(step$ | async) >= 1" class="chckd-tab-lbl chckd-tab-lbl-1"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Equipment attributes</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <equipment-attributes (addRegister)="onAddRegister($event)"
+                                (close)="onCloseWizard()"
+                                (comboSettingsChange)="onComboSettingsChange($event)"
+                                (deviceChanges)="onDeviceChanges($event)"
+                                (nextStep)="onNextStep($event)"
+                                (openImage)="onOpenImage($event)"
+                                (parentMeterChanges)="onParentMeterChange($event)"
+                                (registerFileChange)="onRegisterFileChange($event)"
+                                (registerScaleChange)="onRegisterScaleChange($event)"
+                                (registerSequenceChange)="onRegisterSequenceChange($event)"
+                                (removeRegister)="onRemoveRegister($event)"
+                                [actualPhotoUrl]="actualPhotoUrl"
+                                [equipmentRegistersDict]="equipmentRegistersDict$ | async"
+                                [equipmentTemplateForm]="equipmentTemplateForm$ | async"
+                                [equipmentTemplates]="equipmentTemplates$ | async"
+                                [isFixedRegister]="isFixedRegister"
+                                [meters]="meters$ | async"
+                                [notIncludedRegisters]="notIncludedRegisters$ | async"
+                                [registerFiles]="registerFiles$ | async"></equipment-attributes>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="1">
+        <ng-template ngbTabTitle>
+          <span *ngIf="(step$ | async) < 2" class="tab-lbl text-uppercase">2</span>
+          <span *ngIf="(step$ | async) >= 2" class="chckd-tab-lbl chckd-tab-lbl-1"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Location details</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <equipment-location (cancel)="onCloseWizard()"
+                              (createLocation)="onCreate()"
+                              (locationChange)="onLocationChange($event)"
+                              (locationTypeChange)="onLocationTypeChange($event)"
+                              (nextStep)="onNextStep($event)"
+                              (supplieChange)="onSupplieChange($event)"
+                              (technicianChange)="onTechnicianChange($event)"
+                              (testingDateChange)="onTestingDateChange($event)"
+                              [locationForm]="locationForm$ | async"
+                              [locationTypes]="locationTypes$ | async"
+                              [locations]="locations$ | async" [supplies]="supplies$ | async"
+                              [technicians]="technicians$ | async"></equipment-location>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab id="2">
+        <ng-template ngbTabTitle>
+          <span *ngIf="(step$ | async) < 3" class="tab-lbl text-uppercase">3</span>
+          <span *ngIf="(step$ | async) >= 3" class="chckd-tab-lbl chckd-tab-lbl-1"><i
+            class="tab-checked-icon"></i></span>
+          <div class="tab-txt-lbl">Units allocation</div>
+        </ng-template>
+        <ng-template ngbTabContent>
+          <alloc-equip-to-shop (cancel)="onCloseWizard()" (filterChange)="onUpdateFilter($event)"
+                               (nextStep)="onNextStep($event)"
+                               (searchChange)="onUpdateSearchTerm($event)"
+                               (toggleUnit)="onToggleUnit($event)"
+                               [shopCountText]="shopCountText$ | async"
+                               [unitFilterText]="unitFilterText$ | async" [units]="units$ | async"></alloc-equip-to-shop>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>

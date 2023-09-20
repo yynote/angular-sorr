@@ -1,0 +1,35 @@
+<div class="admin-usr-page">
+  <div class="modal-header">
+    <h5 *ngIf="isNew" class="modal-title">Create a new user</h5>
+    <h5 *ngIf="!isNew" class="modal-title">Edit user</h5>
+    <button (click)="onCancel()" aria-label="Close" class="close" data-dismiss="modal" type="button">
+      <i aria-hidden="true" class="icon-relative close-popup-icon"></i>
+    </button>
+  </div>
+  <div class="container-fluid none-padding">
+    <div class="dnm-tabset">
+      <ngb-tabset>
+        <ngb-tab id="tab-0">
+          <ng-template ngbTabTitle>
+            <span class="d-flex text-uppercase">
+              <i class="tab-icon dnm-icon-userprofiles"></i>General Info
+            </span>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <user-detail [isNew]="isNew" [model]="model"></user-detail>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab *ngIf="!isNew" id="tab-1">
+          <ng-template ngbTabTitle>
+            <span class="d-flex text-uppercase">
+              <i class="tab-icon dnm-icon-users"></i>Password
+            </span>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <reset-password [userId]="model.id"></reset-password>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>

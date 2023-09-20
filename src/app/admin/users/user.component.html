@@ -1,0 +1,44 @@
+<div class="page-content admin-usr-page">
+
+  <!-- header -->
+  <div class="container-fluid">
+    <div class="row d-flex align-items-center">
+      <div class="col-6 none-padding">
+        <h1 class="page-title">Users</h1>
+      </div>
+      <div class="col-6 none-padding text-right">
+        <button (click)="onCreate()" class="dnm-btn dnm-btn-primary text-uppercase add-entity-btn" type="button">
+          <span>Add New User</span>
+          <i class="icon-relative add-users-icon"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid none-padding">
+    <div class="dnm-tabset">
+      <ngb-tabset>
+        <ngb-tab *ngIf="accessPermission.canManageUsers" id="tab-0">
+          <ng-template ngbTabTitle>
+            <span class="d-flex text-uppercase">
+              <i class="tab-icon dnm-icon-userprofiles"></i>Users List
+            </span>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <global-users></global-users>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab *ngIf="accessPermission.canManageRoles" id="tab-1">
+          <ng-template ngbTabTitle>
+            <span class="d-flex text-uppercase">
+              <i class="tab-icon dnm-icon-users"></i>Roles
+            </span>
+          </ng-template>
+          <ng-template ngbTabContent>
+            <global-roles></global-roles>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+    </div>
+  </div>
+</div>
